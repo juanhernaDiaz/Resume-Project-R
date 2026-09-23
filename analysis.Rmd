@@ -10,4 +10,12 @@ df <- read.csv("Student_Performance.csv")
 str(df)
 summary(df)
 colSums(is.na(df))
+att_to_score <- cor(df$attendance_percentage, df$overall_score)
+a_plot <- ggplot(df, aes(x = attendance_percentage, y = overall_score)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  labs(title = "Attendance vs. Overall Score",
+       x = "Attendance Percentage",
+       y = "Overall Score")
+a_plot
 ```
