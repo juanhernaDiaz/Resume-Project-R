@@ -4,18 +4,44 @@ output: html_document
 date: "2026-09-22"
 ---
 ```{r}
+# Question 1
 library(dplyr)
 library(ggplot2)
 df <- read.csv("Student_Performance.csv")
 str(df)
 summary(df)
 colSums(is.na(df))
+
 att_to_score <- cor(df$attendance_percentage, df$overall_score)
+# Correlation of 0.293 (rounded), weak positive
+
 a_plot <- ggplot(df, aes(x = attendance_percentage, y = overall_score)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm") +
   labs(title = "Attendance vs. Overall Score",
        x = "Attendance Percentage",
        y = "Overall Score")
+
 a_plot
 ```
+```{r}
+# Question 2
+library(dplyr)
+library(ggplot2)
+df <- read.csv("Student_Performance.csv")
+str(df)
+summary(df)
+colSums(is.na(df))
+
+p_value <- t.test(overall_score ~ internet_access, data = df)
+# p-value of 0.422, 95% confidence level
+
+b_plot <- ggplot(df, aes(x = internet_access, y = overall_score)) +
+  geom_boxplot() +
+  labs(title = "Overall Score by Internet Access",
+       x = "Internet Access",
+       y = "Overall Score")
+
+b_plot
+```
+
